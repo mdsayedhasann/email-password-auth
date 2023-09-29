@@ -13,8 +13,13 @@ const Register = () => {
         const email = e.target.email.value
         const password = e.target.password.value
 
+        if(password.length < 6){
+            setRegisteredError('Please Enter a password more than 6 charecter')
+            return
+        }
+
         // Reset Error 
-        setRegisterSuccess('')
+        setRegisteredError('')
         setRegisterSuccess('')
 
         createUserWithEmailAndPassword(auth, email, password)
@@ -24,8 +29,7 @@ const Register = () => {
             setRegisterSuccess(reg)
         })
         .catch(error => {
-            console.log(error);
-            console.log(error.message);
+            console.error(error);
             setRegisteredError(error.message)
         })
         console.log('Registered');
