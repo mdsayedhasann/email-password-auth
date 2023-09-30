@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import auth from "../firebase/firebase.init";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/Ai";
@@ -41,6 +44,14 @@ const Register = () => {
         const reg = userCredential.user;
         console.log(reg);
         setRegisterSuccess(reg);
+
+        sendEmailVerification(userCredential.user)
+          .then(() => {
+            console.log("Email Verified message send");
+          })
+          .catch((error) => {
+            alert(error);
+          });
       })
       .catch((error) => {
         console.error(error);
