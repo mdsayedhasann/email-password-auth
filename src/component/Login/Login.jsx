@@ -22,7 +22,11 @@ const Login = () => {
       .then((result) => {
         const userr = result.user;
         console.log(userr);
-        setLoginSuccess("Login Success");
+        if (result.user.emailVerified === true) {
+          setLoginSuccess("Login Success");
+        } else {
+          alert("email not verified");
+        }
       })
       .catch((error) => {
         console.log(error);
